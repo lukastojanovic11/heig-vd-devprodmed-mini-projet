@@ -66,6 +66,16 @@
                             {{ __('ui.tokens.form.fields.scopes.options.posts_delete') }}
                         </label>
                     </div>
+
+                    {{-- scope pour lire les catégories de jeux --}}
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="scope-categories:read" name="scopes[]" value="categories:read"
+                            {{ in_array('categories:read', old('scopes', [])) ? 'checked' : '' }} class="mr-2">
+                        <label for="scope-categories:read" class="text-sm text-gray-700 dark:text-gray-300">
+                            Lire les catégories de jeux (categories:read)
+                        </label>
+                    </div>
+
                     @error('scopes')
                         <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ $message }}</p>
                     @enderror

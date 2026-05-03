@@ -26,10 +26,25 @@
                     <a href="{{ url('/') }}" class="block hover:opacity-80 transition">
                         {{ config('app.name') }}
                     </a>
+
                     <a href="{{ url('/posts') }}"
                         class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-800 dark:hover:bg-purple-800">
                         {{ __('ui.posts.index.title') }}
                     </a>
+
+                    {{-- Lien vers les catégories, visible par tout le monde --}}
+                    <a href="{{ url('/categories') }}"
+                        class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-800 dark:hover:bg-purple-800">
+                        🎮 Genres
+                    </a>
+
+                    {{-- Lien wishlist visible uniquement pour les utilisateurs connectés --}}
+                    @auth
+                        <a href="{{ url('/my-profile/wishlist') }}"
+                            class="block bg-teal-700 dark:bg-purple-900 px-3 py-1 rounded-md hover:bg-teal-800 dark:hover:bg-purple-800">
+                            🔖 Wishlist
+                        </a>
+                    @endauth
                 </div>
 
                 @auth

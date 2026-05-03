@@ -67,6 +67,7 @@ class PostController extends Controller
         $post = Post::with('user')
                     ->with('likes')
                     ->with('category') // On charge la catégorie du post
+                    ->with('wishedBy') // pour le bouton wishlist
                     ->findOrFail($id);
 
         $user = Auth::user();

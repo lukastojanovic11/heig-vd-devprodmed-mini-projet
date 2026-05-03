@@ -33,4 +33,13 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+ * Les utilisateurs qui ont ce post dans leur wishlist.
+ * Même relation vue depuis le post cette fois.
+ */
+public function wishedBy(): BelongsToMany
+{
+    return $this->belongsToMany(User::class, 'wishlists')->withTimestamps();
+}
 }

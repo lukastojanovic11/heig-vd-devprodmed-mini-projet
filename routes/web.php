@@ -9,6 +9,7 @@ use App\Http\Controllers\TokenController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\WishlistController;
 
 Route::get('/', function () {
     $posts = Post::orderBy('created_at', 'desc')->with('user')->with('likes')->limit(3)->get();
@@ -44,3 +45,9 @@ Route::resource('tokens', TokenController::class)->only(['index', 'create', 'sto
 Route::resource('categories', CategoryController::class)
      ->only(['index', 'show', 'create', 'store'])
      ->middleware(['create' => 'auth', 'store' => 'auth']);
+
+     // Routes pour la wishlist
+// index = voir sa wishlist (GET /my-profile/wishlist)
+// update = ajouter/retirer un post (PUT /wishlist/{post})
+Route::get('/my-profile/wishlist', [WishlistController::class, 'index'])->middleware('auth');
+Route::match(['put', 'patch'], '/wishlist/{post}', [WishlistController::class, 'update'])->middleware('auth');

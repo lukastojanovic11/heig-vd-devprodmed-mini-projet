@@ -28,4 +28,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Post::class, 'likes')->using(Like::class)->withTimestamps()->withPivot('reaction');
     }
+
+    /**
+ * Les posts que l'utilisateur a ajoutés à sa wishlist.
+ * C'est une relation many-to-many via la table pivot wishlists.
+ * Un user peut avoir plusieurs posts en wishlist,
+ * et un post peut être dans la wishlist de plusieurs users.
+ */
+public function wishlist(): BelongsToMany
+{
+    return $this->belongsToMany(Post::class, 'wishlists')->withTimestamps();
+}
 }
